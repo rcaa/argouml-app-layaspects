@@ -1,6 +1,8 @@
 package org.argouml.guillemets;
 
 import java.awt.GridBagConstraints;
+import java.beans.PropertyChangeEvent;
+
 import javax.swing.JPanel;
 import org.argouml.kernel.ProjectSettings;
 import org.argouml.notation.NotationSettings;
@@ -11,9 +13,8 @@ public privileged aspect ArgoUMLGuillemetsDynamic extends ArgoUMLGuillemetsAbstr
 
     pointcut driver() : if(Driver.getDriver("argo.notation.guillemots").equals("true"));
 
-    pointcut createCheckBoxGuillemotsHook(JPanel settings,
-            GridBagConstraints constraints, SettingsTabNotation cthis) 
-        : ArgoUMLGuillemetsAbstract.createCheckBoxGuillemotsHook(settings, constraints, cthis) && driver();
+    pointcut isChangePropertyGuillemetsHook(final PropertyChangeEvent pce) 
+    : ArgoUMLGuillemetsAbstract.isChangePropertyGuillemetsHook(pce) && driver();
 
     pointcut isUseGuillemets(NotationSettings cthis) 
     : ArgoUMLGuillemetsAbstract.isUseGuillemets(cthis) && driver();
